@@ -1,0 +1,62 @@
+
+> insurance-dapp@1.0.0 test
+> node --test --test-concurrency=1 test/*.test.js
+
+TAP version 13
+# Subtest: T1 чтение: poolBalance/reserved/nextClaimId и роль страховщика
+ok 1 - T1 чтение: poolBalance/reserved/nextClaimId и роль страховщика
+  ---
+  duration_ms: 493.533802
+  type: 'test'
+  ...
+# Subtest: T2 положительный: submitClaim проходит все этапы и меняет состояние
+ok 2 - T2 положительный: submitClaim проходит все этапы и меняет состояние
+  ---
+  duration_ms: 99.130132
+  type: 'test'
+  ...
+# Subtest: T3 негативный: approveClaim без ADJUSTER_ROLE отклоняется контрактом (preflight)
+ok 3 - T3 негативный: approveClaim без ADJUSTER_ROLE отклоняется контрактом (preflight)
+  ---
+  duration_ms: 106.561243
+  type: 'test'
+  ...
+# Subtest: T4 негативный: откат в блоке (status=0) распознаётся по квитанции, событий нет
+ok 4 - T4 негативный: откат в блоке (status=0) распознаётся по квитанции, событий нет
+  ---
+  duration_ms: 67.163989
+  type: 'test'
+  ...
+# Subtest: T5 неверная сеть: отправка блокируется до подписи
+ok 5 - T5 неверная сеть: отправка блокируется до подписи
+  ---
+  duration_ms: 1.316296
+  type: 'test'
+  ...
+# Subtest: T6 отказ в подписи: ACTION_REJECTED классифицируется как rejected
+ok 6 - T6 отказ в подписи: ACTION_REJECTED классифицируется как rejected
+  ---
+  duration_ms: 0.227598
+  type: 'test'
+  ...
+# Subtest: T7 полный цикл: approve + withdrawPayout, баланс и резерв
+ok 7 - T7 полный цикл: approve + withdrawPayout, баланс и резерв
+  ---
+  duration_ms: 203.181058
+  type: 'test'
+  ...
+# Subtest: T8 события: два типа событий с номером блока, без дублирования при повторной загрузке
+ok 8 - T8 события: два типа событий с номером блока, без дублирования при повторной загрузке
+  ---
+  duration_ms: 103.409379
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1301.774839

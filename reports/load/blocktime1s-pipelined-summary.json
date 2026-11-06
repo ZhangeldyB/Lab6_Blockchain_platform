@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "blocktime1s",
+    "rep": 1,
+    "profile": "pipelined",
+    "n": 30,
+    "p50": 1008.7,
+    "p95": 1011.1,
+    "mean": 1008.9,
+    "throughput": 29.66,
+    "durationMs": 1012,
+    "failRate": 0,
+    "gasUsedMean": 120085,
+    "gasUsedMin": 120075,
+    "gasUsedMax": 120087,
+    "blocksUsed": 1
+  },
+  {
+    "mode": "blocktime1s",
+    "rep": 2,
+    "profile": "pipelined",
+    "n": 30,
+    "p50": 1014.6,
+    "p95": 1016,
+    "mean": 1014.6,
+    "throughput": 29.52,
+    "durationMs": 1016,
+    "failRate": 0,
+    "gasUsedMean": 120085,
+    "gasUsedMin": 120075,
+    "gasUsedMax": 120087,
+    "blocksUsed": 1
+  },
+  {
+    "mode": "blocktime1s",
+    "rep": 3,
+    "profile": "pipelined",
+    "n": 30,
+    "p50": 1002.8,
+    "p95": 1004.3,
+    "mean": 1002.9,
+    "throughput": 29.87,
+    "durationMs": 1005,
+    "failRate": 0,
+    "gasUsedMean": 120085,
+    "gasUsedMin": 120075,
+    "gasUsedMax": 120087,
+    "blocksUsed": 1
+  }
+]

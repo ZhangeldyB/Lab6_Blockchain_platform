@@ -1,0 +1,14 @@
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/lib/
+# Node
+node_modules/
+frontend/dist/
+# Секреты
+.env
+*.env.local
+# Журналы мониторинга (образцы лежат в reports/)
+ops/monitor/logs/
+ops/demo.log

@@ -1,0 +1,14 @@
+{
+  "name": "insurance-ops",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "monitor": "node monitor/monitor.js",
+    "test": "node --test monitor/*.test.js",
+    "load": "node loadtest/loadtest.js"
+  },
+  "dependencies": {
+    "ethers": "^6.15.0"
+  }
+}

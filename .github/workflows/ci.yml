@@ -1,0 +1,111 @@
+name: CI (DevSecOps)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    name: Контракт - сборка, тесты, Slither
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установка Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Установка зависимостей (forge-std, OpenZeppelin)
+        run: ./install-deps.sh
+
+      - name: Сборка
+        run: forge build --sizes
+
+      - name: Тесты (интеграционные, fuzz, invariant)
+        run: forge test -vv
+
+      - name: Установка Slither
+        run: pip install slither-analyzer==0.11.6
+
+      - name: Статический анализ Slither (high/medium - сбой сборки)
+        run: slither . --filter-paths "lib/|test/" --fail-medium
+
+      - name: Сохранение артефактов сборки
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-out
+          path: contracts/out
+
+  frontend:
+    name: dApp - зависимости, сборка, интеграционные тесты
+    needs: contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: contract-out
+          path: contracts/out
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            ops/package-lock.json
+
+      - name: Установка зависимостей dApp
+        working-directory: frontend
+        run: npm ci
+
+      - name: Проверка зависимостей dApp (npm audit)
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
+      - name: Сборка dApp
+        working-directory: frontend
+        run: npm run build
+
+      - name: Интеграционные тесты dApp против Anvil
+        working-directory: frontend
+        run: npm test
+
+      - name: Установка зависимостей мониторинга
+        working-directory: ops
+        run: npm ci
+
+      - name: Проверка зависимостей мониторинга (npm audit)
+        working-directory: ops
+        run: npm audit --audit-level=high
+
+      - name: Тесты правил обнаружения
+        working-directory: ops
+        run: npm test
+
+      - name: Демонстрация мониторинга (R1 и R2 должны сработать)
+        working-directory: ops
+        run: |
+          node scripts/demo-monitoring.js | tee demo.log
+          test "$(wc -l < monitor/logs/alerts.jsonl)" -eq 2
+
+      - name: Журналы мониторинга
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-logs
+          path: ops/monitor/logs

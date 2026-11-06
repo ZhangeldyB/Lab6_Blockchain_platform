@@ -1,0 +1,87 @@
+No files changed, compilation skipped
+
+Ran 11 tests for test/Integration.t.sol:IntegrationTest
+[PASS] testFuzz_NoRoleCannotChangeStatus(address) (runs: 512, μ: 117284, ~: 117284)
+[PASS] testFuzz_PayoutEqualsClaim(uint256) (runs: 512, μ: 166611, ~: 166552)
+[PASS] test_FullLifecycle_ChangesStateAndBalances() (gas: 169801)
+[PASS] test_RevertWhen_ApproveExceedsPool() (gas: 122240)
+[PASS] test_RevertWhen_DoubleWithdraw() (gas: 172291)
+[PASS] test_RevertWhen_InvalidInput() (gas: 14682)
+[PASS] test_RevertWhen_NonAdjusterApproves() (gas: 124308)
+[PASS] test_RevertWhen_NonAdminFunds() (gas: 21697)
+[PASS] test_RevertWhen_StrangerWithdraws() (gas: 153378)
+[PASS] test_Submit_EmitsEvents() (gas: 113879)
+[PASS] test_Withdraw_EmitsSinglePayoutEvent() (gas: 169115)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 1.10s (1.10s CPU time)
+
+Ran 3 tests for test/Invariant.t.sol:InvariantTest
+[PASS] invariant_I1_OnlyAdjusterChangesStatus() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1170  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1198  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1186  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1127  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1142  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1178  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1191  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+[PASS] invariant_I2_SolvencyAndReserve() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1133  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1125  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1189  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1175  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1169  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1239  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1162  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+[PASS] invariant_I3_NoDoublePayout() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1184  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1207  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1112  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1189  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1180  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1167  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1153  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 1.95s (4.35s CPU time)
+
+╭-----------------+--------+--------+---------╮
+| Test Suite      | Passed | Failed | Skipped |
++=============================================+
+| IntegrationTest | 11     | 0      | 0       |
+|-----------------+--------+--------+---------|
+| InvariantTest   | 3      | 0      | 0       |
+╰-----------------+--------+--------+---------╯
+

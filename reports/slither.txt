@@ -1,0 +1,9 @@
+'forge clean' running (wd: /home/claude/lab6_blockchain_platform/contracts)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: /home/claude/lab6_blockchain_platform/contracts)
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in InsuranceClaimRegistry.withdrawPayout(uint256) (src/InsuranceClaimRegistry.sol#121-138):
+	- (ok,None) = msg.sender.call{value: amount}() (src/InsuranceClaimRegistry.sol#136)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Slither:. analyzed (7 contracts with 102 detectors), 1 result(s) found

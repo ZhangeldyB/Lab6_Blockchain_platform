@@ -1,0 +1,276 @@
+=== [11:54:06] STEP: install contract deps
+Installing forge-std in /tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/forge-std (url: https://github.com/foundry-rs/forge-std, tag: v1.17.0)
+Cloning into '/tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/forge-std'...
+    Installed forge-std v1.17.0
+Installing openzeppelin-contracts in /tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/openzeppelin-contracts (url: https://github.com/OpenZeppelin/openzeppelin-contracts, tag: v5.4.0)
+Cloning into '/tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/openzeppelin-contracts'...
+Submodule 'lib/erc4626-tests' (https://github.com/a16z/erc4626-tests.git) registered for path 'lib/erc4626-tests'
+Submodule 'lib/forge-std' (https://github.com/foundry-rs/forge-std) registered for path 'lib/forge-std'
+Submodule 'lib/halmos-cheatcodes' (https://github.com/a16z/halmos-cheatcodes) registered for path 'lib/halmos-cheatcodes'
+Cloning into '/tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/openzeppelin-contracts/lib/erc4626-tests'...
+Cloning into '/tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/openzeppelin-contracts/lib/forge-std'...
+Cloning into '/tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts/lib/openzeppelin-contracts/lib/halmos-cheatcodes'...
+    Installed openzeppelin-contracts v5.4.0
+=== exit code: 0
+=== [11:54:14] STEP: forge build
+Compiling 30 files with Solc 0.8.30
+Solc 0.8.30 finished in 1.53s
+Compiler run successful!
+
+╭------------------------+------------------+-------------------+--------------------+---------------------╮
+| Contract               | Runtime Size (B) | Initcode Size (B) | Runtime Margin (B) | Initcode Margin (B) |
++==========================================================================================================+
+| InsuranceClaimRegistry | 3,382            | 3,724             | 21,194             | 45,428              |
+╰------------------------+------------------+-------------------+--------------------+---------------------╯
+
+=== exit code: 0
+=== [11:54:15] STEP: forge test
+No files changed, compilation skipped
+
+Ran 11 tests for test/Integration.t.sol:IntegrationTest
+[PASS] testFuzz_NoRoleCannotChangeStatus(address) (runs: 512, μ: 117284, ~: 117284)
+[PASS] testFuzz_PayoutEqualsClaim(uint256) (runs: 512, μ: 166618, ~: 166805)
+[PASS] test_FullLifecycle_ChangesStateAndBalances() (gas: 169801)
+[PASS] test_RevertWhen_ApproveExceedsPool() (gas: 122240)
+[PASS] test_RevertWhen_DoubleWithdraw() (gas: 172291)
+[PASS] test_RevertWhen_InvalidInput() (gas: 14682)
+[PASS] test_RevertWhen_NonAdjusterApproves() (gas: 124308)
+[PASS] test_RevertWhen_NonAdminFunds() (gas: 21697)
+[PASS] test_RevertWhen_StrangerWithdraws() (gas: 153378)
+[PASS] test_Submit_EmitsEvents() (gas: 113879)
+[PASS] test_Withdraw_EmitsSinglePayoutEvent() (gas: 169115)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 71.71ms (71.15ms CPU time)
+
+Ran 3 tests for test/Invariant.t.sol:InvariantTest
+[PASS] invariant_I1_OnlyAdjusterChangesStatus() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1174  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1188  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1158  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1266  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1143  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1148  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1115  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+[PASS] invariant_I2_SolvencyAndReserve() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1212  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1186  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1116  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1141  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1185  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1185  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1167  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+[PASS] invariant_I3_NoDoublePayout() (runs: 128, calls: 8192, reverts: 0)
+
+╭----------+------------------+-------+---------+----------╮
+| Contract | Selector         | Calls | Reverts | Discards |
++==========================================================+
+| Handler  | approve          | 1170  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | attackPrivileged | 1127  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | fund             | 1151  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | reject           | 1174  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | review           | 1208  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | submit           | 1175  | 0       | 0        |
+|----------+------------------+-------+---------+----------|
+| Handler  | withdraw         | 1187  | 0       | 0        |
+╰----------+------------------+-------+---------+----------╯
+
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 1.95s (4.47s CPU time)
+
+Ran 2 test suites in 1.96s (2.02s CPU time): 14 tests passed, 0 failed, 0 skipped (14 total tests)
+=== exit code: 0
+=== [11:54:17] STEP: slither --fail-medium
+'forge clean' running (wd: /tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: /tmp/claude-0/-home-claude/5ba62d69-62a7-5f7e-b575-9f14fba4838b/scratchpad/ci/contracts)
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in InsuranceClaimRegistry.withdrawPayout(uint256) (src/InsuranceClaimRegistry.sol#121-138):
+	- (ok,None) = msg.sender.call{value: amount}() (src/InsuranceClaimRegistry.sol#136)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Slither:. analyzed (7 contracts with 102 detectors), 1 result(s) found
+=== exit code: 0
+=== [11:54:18] STEP: npm ci frontend
+
+added 76 packages, and audited 77 packages in 2s
+
+12 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+=== exit code: 0
+=== [11:54:20] STEP: npm audit frontend
+found 0 vulnerabilities
+=== exit code: 0
+=== [11:54:21] STEP: vite build
+
+> insurance-dapp@1.0.0 build
+> vite build
+
+vite v6.4.5 building for production...
+transforming...
+✓ 176 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:   0.28 kB
+dist/assets/index-BwZfowZf.css    2.69 kB │ gzip:   1.11 kB
+dist/assets/index-xEMP2No1.js   422.30 kB │ gzip: 148.28 kB
+✓ built in 2.13s
+=== exit code: 0
+=== [11:54:23] STEP: integration tests
+
+> insurance-dapp@1.0.0 test
+> node --test --test-concurrency=1 test/*.test.js
+
+TAP version 13
+# Subtest: T1 чтение: poolBalance/reserved/nextClaimId и роль страховщика
+ok 1 - T1 чтение: poolBalance/reserved/nextClaimId и роль страховщика
+  ---
+  duration_ms: 442.686584
+  type: 'test'
+  ...
+# Subtest: T2 положительный: submitClaim проходит все этапы и меняет состояние
+ok 2 - T2 положительный: submitClaim проходит все этапы и меняет состояние
+  ---
+  duration_ms: 95.238625
+  type: 'test'
+  ...
+# Subtest: T3 негативный: approveClaim без ADJUSTER_ROLE отклоняется контрактом (preflight)
+ok 3 - T3 негативный: approveClaim без ADJUSTER_ROLE отклоняется контрактом (preflight)
+  ---
+  duration_ms: 92.943331
+  type: 'test'
+  ...
+# Subtest: T4 негативный: откат в блоке (status=0) распознаётся по квитанции, событий нет
+ok 4 - T4 негативный: откат в блоке (status=0) распознаётся по квитанции, событий нет
+  ---
+  duration_ms: 64.034493
+  type: 'test'
+  ...
+# Subtest: T5 неверная сеть: отправка блокируется до подписи
+ok 5 - T5 неверная сеть: отправка блокируется до подписи
+  ---
+  duration_ms: 1.200041
+  type: 'test'
+  ...
+# Subtest: T6 отказ в подписи: ACTION_REJECTED классифицируется как rejected
+ok 6 - T6 отказ в подписи: ACTION_REJECTED классифицируется как rejected
+  ---
+  duration_ms: 0.176764
+  type: 'test'
+  ...
+# Subtest: T7 полный цикл: approve + withdrawPayout, баланс и резерв
+ok 7 - T7 полный цикл: approve + withdrawPayout, баланс и резерв
+  ---
+  duration_ms: 203.806874
+  type: 'test'
+  ...
+# Subtest: T8 события: два типа событий с номером блока, без дублирования при повторной загрузке
+ok 8 - T8 события: два типа событий с номером блока, без дублирования при повторной загрузке
+  ---
+  duration_ms: 103.455942
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1206.946365
+=== exit code: 0
+=== [11:54:25] STEP: npm ci ops
+
+added 9 packages, and audited 10 packages in 1s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+=== exit code: 0
+=== [11:54:26] STEP: npm audit ops
+found 0 vulnerabilities
+=== exit code: 0
+=== [11:54:26] STEP: rule tests
+
+> insurance-ops@1.0.0 test
+> node --test monitor/*.test.js
+
+TAP version 13
+# Subtest: R1: 2 попытки - без тревоги, 3-я в окне 60 с - тревога HIGH
+ok 1 - R1: 2 попытки - без тревоги, 3-я в окне 60 с - тревога HIGH
+  ---
+  duration_ms: 1.594641
+  type: 'test'
+  ...
+# Subtest: R1: попытки вне окна не накапливаются
+ok 2 - R1: попытки вне окна не накапливаются
+  ---
+  duration_ms: 0.17222
+  type: 'test'
+  ...
+# Subtest: R1: защита от повторных уведомлений (cooldown 300 с) и повторных сигналов
+ok 3 - R1: защита от повторных уведомлений (cooldown 300 с) и повторных сигналов
+  ---
+  duration_ms: 0.387198
+  type: 'test'
+  ...
+# Subtest: R2: 3 ошибки RPC за 30 с - тревога MEDIUM, одна на cooldown
+ok 4 - R2: 3 ошибки RPC за 30 с - тревога MEDIUM, одна на cooldown
+  ---
+  duration_ms: 1.605597
+  type: 'test'
+  ...
+# Subtest: Штатный поток успешных транзакций не вызывает тревог
+ok 5 - Штатный поток успешных транзакций не вызывает тревог
+  ---
+  duration_ms: 0.448158
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 84.673831
+=== exit code: 0
+=== [11:54:27] STEP: monitoring demo
+{"ts":"2026-10-30T11:54:31.049Z","rule":"R1_ACCESS_VIOLATION","title":"Повторные попытки нарушения доступа","severity":"HIGH","key":"0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc","response":"уведомление, адрес в watchlist, ручная проверка ролей; при повторе - блокировка адреса на уровне dApp/RPC-шлюза","signal":"tx_receipt","address":"0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc","count":3,"windowSec":60,"lastMethod":"approveClaim","lastError":"AccessControlUnauthorizedAccount","correlationId":"0xa45d8ae96384978b95f2d007bb61f0c9c757582a8ef4ee7c61b234f259e724b9"}
+{"ts":"2026-10-30T11:54:33.087Z","rule":"R2_OPERATIONAL_FAILURE","title":"Эксплуатационный сбой (RPC или массовые откаты)","severity":"MEDIUM","key":"rpc:http://127.0.0.1:8545","response":"уведомление дежурному, переключение на резервный RPC, приостановка отправки транзакций в dApp","signal":"rpc_error","count":3,"windowSec":30,"lastError":"connect ECONNREFUSED 127.0.0.1:8545","correlationId":"bb614b06-61ad-4674-846e-a873d1757207"}
+
+записей телеметрии по категориям: {"app_log":8,"tx_receipt":11,"contract_event":12,"rpc_error":14}
+подавлено повторных уведомлений: 13
+=== exit code: 0
+ALL OK

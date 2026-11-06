@@ -1,0 +1,5 @@
+Package               Current  Wanted  Latest  Location                           Depended by
+@vitejs/plugin-react    4.7.0   4.7.0   6.1.2  node_modules/@vitejs/plugin-react  frontend
+react                  18.3.1  18.3.1  19.3.1  node_modules/react                 frontend
+react-dom              18.3.1  18.3.1  19.3.1  node_modules/react-dom             frontend
+vite                    6.4.5   6.4.5   8.3.5  node_modules/vite                  frontend

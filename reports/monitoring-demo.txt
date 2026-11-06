@@ -1,0 +1,21 @@
+[2026-10-30T11:48:13.694Z] контракт развёрнут: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+monitor: RPC http://127.0.0.1:8545, контракт 0x5fbdb2315678afecb367f032d93f642f64180aa3, приём журналов :8787
+[2026-10-30T11:48:14.899Z] СЦЕНАРИЙ 1: штатная работа (ожидается 0 тревог)
+[2026-10-30T11:48:16.902Z] тревог после сценария 1: 0
+[2026-10-30T11:48:16.902Z] СЦЕНАРИЙ 2: mallory пытается одобрить чужой случай (ожидается R1)
+[2026-10-30T11:48:17.039Z]   tx 0xa45d8ae963… status=0, событий: 0
+[2026-10-30T11:48:17.105Z]   tx 0x0e94ee29a0… status=0, событий: 0
+[2026-10-30T11:48:17.168Z]   tx 0x4bff8f543e… status=0, событий: 0
+[ALERT HIGH] R1_ACCESS_VIOLATION key=0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc count=3
+[2026-10-30T11:48:18.668Z] тревог после сценария 2: 1
+[2026-10-30T11:48:18.668Z] СЦЕНАРИЙ 3: остановка узла Anvil (ожидается R2)
+[ALERT MEDIUM] R2_OPERATIONAL_FAILURE key=rpc:http://127.0.0.1:8545 count=3
+[2026-10-30T11:48:22.670Z] тревог после сценария 3: 2
+monitor: остановлен, подавлено повторных уведомлений: 13
+
+===== alerts.jsonl =====
+{"ts":"2026-10-30T11:48:17.259Z","rule":"R1_ACCESS_VIOLATION","title":"Повторные попытки нарушения доступа","severity":"HIGH","key":"0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc","response":"уведомление, адрес в watchlist, ручная проверка ролей; при повторе - блокировка адреса на уровне dApp/RPC-шлюза","signal":"tx_receipt","address":"0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc","count":3,"windowSec":60,"lastMethod":"approveClaim","lastError":"AccessControlUnauthorizedAccount","correlationId":"0xa45d8ae96384978b95f2d007bb61f0c9c757582a8ef4ee7c61b234f259e724b9"}
+{"ts":"2026-10-30T11:48:19.294Z","rule":"R2_OPERATIONAL_FAILURE","title":"Эксплуатационный сбой (RPC или массовые откаты)","severity":"MEDIUM","key":"rpc:http://127.0.0.1:8545","response":"уведомление дежурному, переключение на резервный RPC, приостановка отправки транзакций в dApp","signal":"rpc_error","count":3,"windowSec":30,"lastError":"connect ECONNREFUSED 127.0.0.1:8545","correlationId":"ce07c9ae-4641-49e6-95bb-a57ed7a64eeb"}
+
+записей телеметрии по категориям: {"app_log":8,"tx_receipt":11,"contract_event":12,"rpc_error":14}
+подавлено повторных уведомлений: 13
